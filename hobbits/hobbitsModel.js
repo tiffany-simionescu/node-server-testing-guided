@@ -9,15 +9,22 @@ module.exports = {
 };
 
 async function insert(hobbit) {
-  return null;
+  const [id] = await db("hobbits").insert(hobbit);
+  return findById(id);
 }
 
 async function update(id, changes) {
-  return null;
+  await db("hobbits")
+    .where({ id })
+    .update(changes)
+
+    return findById(id);
 }
 
 function remove(id) {
-  return null;
+  return db("hobbits")
+    .where({ id })
+    .del()
 }
 
 function getAll() {
@@ -25,5 +32,7 @@ function getAll() {
 }
 
 function findById(id) {
-  return null;
+  return db('hobbits')
+    .where({ id })
+    .first()
 }
